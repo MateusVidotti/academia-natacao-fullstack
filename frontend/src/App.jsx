@@ -5,6 +5,12 @@ import Register from "./pages/Register"
 import Home from "./pages/Home"
 import NotFound from "./pages/NotFound"
 import ProtectedRoute from "./components/ProtectedRoute"
+import Usuarios from './pages/Usuarios'
+import Alunos from './pages/Alunos'
+import Fornecedores from './pages/Fornecedores'
+import Pagamentos from './pages/Pagamentos2'
+import Recebimentos from './pages/Recebimentos'
+
 
 function Logout() {
   localStorage.clear()
@@ -25,6 +31,46 @@ function App() {
           element={
             <ProtectedRoute>
               <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/usuarios"
+          element={
+            <ProtectedRoute>
+              <Usuarios />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/alunos"
+          element={
+            <ProtectedRoute>
+              <Alunos />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/fornecedores"
+          element={
+            <ProtectedRoute>
+              <Fornecedores />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/pagamentos"
+          element={
+            <ProtectedRoute>
+              <Pagamentos />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/recebimentos"
+          element={
+            <ProtectedRoute>
+              <Recebimentos />
             </ProtectedRoute>
           }
         />

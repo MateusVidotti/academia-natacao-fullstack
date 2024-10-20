@@ -1,3 +1,4 @@
+import Navbar from '../components/layout/navbar';
 import { useState, useEffect } from "react";
 import api from "../api";
 import Note from "../components/Note"
@@ -48,6 +49,7 @@ function Home() {
 
     return (
         <div>
+            <Navbar/>
             <div>
                 <h2>Notes</h2>
                 {notes.map((note) => (
