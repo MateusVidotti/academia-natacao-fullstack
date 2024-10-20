@@ -1,5 +1,5 @@
 from django.db import models
-from fornecedores.models import Fornecedor
+from fornecedor.models import Fornecedor
 
 
 PAGAMENTO_STATUS = [
@@ -10,6 +10,7 @@ PAGAMENTO_STATUS = [
 
 
 class Pagamento(models.Model):
+    id = models.AutoField(primary_key=True)
     fornecedor = models.ForeignKey(Fornecedor, on_delete=models.CASCADE)
     descricao = models.CharField(max_length=255, verbose_name='Descrição')
     valor = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Valor')
