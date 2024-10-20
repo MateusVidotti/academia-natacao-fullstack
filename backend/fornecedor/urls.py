@@ -1,9 +1,9 @@
-from aluno.views import AlunoView
+from fornecedor.views import FornecedorView
 from django.urls import path, include
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register('alunos', AlunoView)
+router.register('fornecedores', FornecedorView)
 
 print(router.urls)
 urlpatterns = [
