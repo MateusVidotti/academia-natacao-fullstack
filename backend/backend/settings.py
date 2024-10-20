@@ -58,10 +58,10 @@ INSTALLED_APPS = [
     "api",
     "rest_framework",
     "corsheaders",
-    # "aluno",
-    # "fornecedor",
-    # "pagamento",
-    # "recebimento",
+    "aluno",
+    "fornecedor",
+    "pagamento",
+    "recebimento",
 ]
 
 MIDDLEWARE = [
