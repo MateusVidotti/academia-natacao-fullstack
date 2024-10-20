@@ -2,7 +2,6 @@ from django.db import models
 
 
 class Fornecedor(models.Model):
-    id = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=120, verbose_name='Nome')
     telefone = models.CharField(max_length=20, verbose_name='Telefone')
     documento = models.CharField(max_length=20, verbose_name='CPF/CNPJ')

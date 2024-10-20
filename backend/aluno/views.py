@@ -1,9 +1,3 @@
-from aluno.models import Aluno
-from aluno.serializers import AlunoSerializer
-from rest_framework import viewsets
+from django.shortcuts import render
 
-
-class AlunoView(viewsets.ModelViewSet):
-    """View Aluno"""
-    queryset = Aluno.objects.all()
-    serializer_class = AlunoSerializer
+# Create your views here.

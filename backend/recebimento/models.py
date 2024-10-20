@@ -1,5 +1,5 @@
 from django.db import models
-from aluno.models import Aluno
+from alunos.models import Aluno
 
 PAGAMENTO_STATUS = [
     ('pendente', 'Pendente'),
@@ -9,7 +9,6 @@ PAGAMENTO_STATUS = [
 
 
 class Recebimento(models.Model):
-    id = models.AutoField(primary_key=True)
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
     descricao = models.CharField(max_length=255, verbose_name='Descrição')
     valor = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Valor')
