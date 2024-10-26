@@ -7,7 +7,9 @@ import NotFound from "./pages/NotFound"
 import ProtectedRoute from "./components/ProtectedRoute"
 import Usuarios from './pages/Usuarios'
 import Alunos from './pages/Alunos'
+import AlunoForm from "./components/forms/AlunoForm"
 import Fornecedores from './pages/Fornecedores'
+import FornecedorForm from "./components/forms/FornecedorForm"
 import Pagamentos from './pages/Pagamentos2'
 import Recebimentos from './pages/Recebimentos'
 
@@ -51,10 +53,39 @@ function App() {
           }
         />
         <Route
+          path="/aluno/novo"
+          element={
+            <ProtectedRoute>
+              <AlunoForm />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/aluno/editar/:id"        element={
+            <ProtectedRoute>
+              <AlunoForm />
+            </ProtectedRoute>
+          } />
+        <Route
           path="/fornecedores"
           element={
             <ProtectedRoute>
               <Fornecedores />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/fornecedor/novo"
+          element={
+            <ProtectedRoute>
+              <FornecedorForm />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/fornecedor/editar/:id"
+          element={
+            <ProtectedRoute>
+              <FornecedorForm />
             </ProtectedRoute>
           }
         />

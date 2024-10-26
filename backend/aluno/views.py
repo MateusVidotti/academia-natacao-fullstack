@@ -8,4 +8,4 @@ class AlunoView(viewsets.ModelViewSet):
     """View Aluno"""
     queryset = Aluno.objects.all()
     serializer_class = AlunoSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]

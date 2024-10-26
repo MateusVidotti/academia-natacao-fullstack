@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from pagamento.models import Pagamento
+from recebimento.models import Recebimento
 
 
-class PagamentoSerializer(serializers.ModelSerializer):
+class RecebimentoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Pagamento
-        fields = ['id', 'fornecedor', 'descricao', 'valor', 'data_emissao', 'data_vencimento', 'status']
+        model = Recebimento
+        fields = ['id', 'aluno', 'descricao', 'valor', 'data_emissao', 'data_vencimento', 'status']
         extra_kwargs = {
             'id': {'required': False},
             'fornecedor': {'required': True},
