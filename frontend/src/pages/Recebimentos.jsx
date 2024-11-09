@@ -1,9 +1,12 @@
 import Navbar from "../components/layout/navbar"
+import RecebimentosTable from "../components/tables/RecebimentosTable"
+import AddButton from "../components/buttons/AddButton"
 function Recebimentos(){
     return(
         <div>
             <Navbar/>
-            <h1>Recebimentos</h1>
+            <AddButton label='Recebimento' url='/recebimento/novo'/>
+            <RecebimentosTable/>
         </div>
     )
 }

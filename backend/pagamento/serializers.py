@@ -3,12 +3,15 @@ from pagamento.models import Pagamento
 
 
 class PagamentoSerializer(serializers.ModelSerializer):
+    fornecedor_nome = serializers.CharField(source='fornecedor.nome', read_only=True)
     class Meta:
         model = Pagamento
-        fields = ['id', 'fornecedor', 'descricao', 'valor', 'data_emissao', 'data_vencimento', 'status']
+        fields = ['id', 'fornecedor', 'fornecedor_nome', 'classe', 'tipo', 'descricao', 'valor', 'data_emissao', 'data_vencimento', 'status']
         extra_kwargs = {
             'id': {'required': False},
             'fornecedor': {'required': True},
+            'classe': {'required': True},
+            'tipo': {'required': True},
             'descricao': {'required': True},
             'valor': {'required': True},
             'data_emissao': {'required': True},

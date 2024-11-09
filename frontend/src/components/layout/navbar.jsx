@@ -1,3 +1,4 @@
+
 import * as React from 'react';
 import { useNavigate  } from 'react-router-dom'
 import AppBar from '@mui/material/AppBar';
@@ -13,8 +14,9 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import logo from '../../assets/img/logo_natacao.jpg';
 
-const pages = ['Usuarios', 'Alunos', 'Fornecedores', 'Pagamentos', 'Recebimentos'];
+const pages = ['Home', 'Alunos', 'Fornecedores', 'Pagamentos', 'Recebimentos'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function Navbar() {
@@ -46,14 +48,22 @@ function Navbar() {
     handleNavigate('/' + page);
   }
 
+  const handleLogout = () => {
+    console.log('logout')
+    handleNavigate('/logout'); // Direciona para a URL de logout
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <img 
+              src={logo} 
+              alt="Logo" 
+              style={{ height: 50, marginRight: 10, display: 'flex' }} 
+            />
           <Typography
             variant="h6"
-            noWrap
             component="a"
             href=""
             sx={{
@@ -64,9 +74,11 @@ function Navbar() {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
+              whiteSpace: 'pre-line', // Garante que <br /> seja respeitado
+              fontSize: '0.8rem', // Ajuste o tamanho desejado
             }}
           >
-            LOGO
+            Academia Águas <br /> Molhadas
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -120,7 +132,7 @@ function Navbar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Águas Molhadas
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -156,7 +168,10 @@ function Navbar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem 
+                  key={setting} 
+                  onClick={setting === 'Logout' ? handleLogout : handleCloseUserMenu}
+                  >
                   <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
                 </MenuItem>
               ))}

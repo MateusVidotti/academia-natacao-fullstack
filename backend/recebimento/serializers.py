@@ -3,12 +3,13 @@ from recebimento.models import Recebimento
 
 
 class RecebimentoSerializer(serializers.ModelSerializer):
+    aluno_nome = serializers.CharField(source='aluno.nome', read_only=True)
     class Meta:
         model = Recebimento
-        fields = ['id', 'aluno', 'descricao', 'valor', 'data_emissao', 'data_vencimento', 'status']
+        fields = ['id', 'aluno', 'aluno_nome', 'descricao', 'valor', 'data_emissao', 'data_vencimento', 'status']
         extra_kwargs = {
             'id': {'required': False},
-            'fornecedor': {'required': True},
+            'aluno': {'required': True},
             'descricao': {'required': True},
             'valor': {'required': True},
             'data_emissao': {'required': True},

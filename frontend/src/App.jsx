@@ -5,13 +5,14 @@ import Register from "./pages/Register"
 import Home from "./pages/Home"
 import NotFound from "./pages/NotFound"
 import ProtectedRoute from "./components/ProtectedRoute"
-import Usuarios from './pages/Usuarios'
 import Alunos from './pages/Alunos'
 import AlunoForm from "./components/forms/AlunoForm"
 import Fornecedores from './pages/Fornecedores'
 import FornecedorForm from "./components/forms/FornecedorForm"
-import Pagamentos from './pages/Pagamentos2'
+import Pagamentos from './pages/Pagamentos'
+import PagamentoForm from "./components/forms/PagamentoForm"
 import Recebimentos from './pages/Recebimentos'
+import RecebimentoForm from "./components/forms/RecebimentoForm"
 
 
 function Logout() {
@@ -37,10 +38,10 @@ function App() {
           }
         />
         <Route
-          path="/usuarios"
+          path="/home"
           element={
             <ProtectedRoute>
-              <Usuarios />
+              <Home />
             </ProtectedRoute>
           }
         />
@@ -98,10 +99,42 @@ function App() {
           }
         />
         <Route
+          path="/pagamento/novo"
+          element={
+            <ProtectedRoute>
+              <PagamentoForm />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/pagamento/editar/:id"
+          element={
+            <ProtectedRoute>
+              <PagamentoForm />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/recebimentos"
           element={
             <ProtectedRoute>
               <Recebimentos />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/recebimento/novo"
+          element={
+            <ProtectedRoute>
+              <RecebimentoForm />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/recebimento/editar/:id"
+          element={
+            <ProtectedRoute>
+              <RecebimentoForm />
             </ProtectedRoute>
           }
         />
