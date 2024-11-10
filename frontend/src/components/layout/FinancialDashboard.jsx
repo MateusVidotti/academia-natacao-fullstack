@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, Typography, Grid, Box, Avatar, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { Card, CardContent, Typography, Grid, Box, Avatar, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
@@ -14,9 +14,10 @@ const FinancialDashboard = () => {
     const [data, setData] = useState({});
     const [chartData, setChartData] = useState({
         faturamento: { labels: [], data: [] },
-        pagamento: { labels: [], data: [] },
+        pagamento_total: { labels: [], data: [] },
         saldo: { labels: [], data: [] }
     });
+    const [selectedClass, setSelectedClass] = useState('total'); // Estado para o seletor de classe de despesas
 
     useEffect(() => {
         getDashData();
@@ -35,17 +36,25 @@ const FinancialDashboard = () => {
             const [faturamentoRes, pagamentoRes, saldoRes] = await Promise.all([
                 api.get('/api/relatorio-faturamento/'),
                 api.get('/api/relatorio-pagamento/'),
-                api.get('/api/relatorio-saldo/')
+                api.get('/api/relatorio-saldo/'),
             ]);
 
             setChartData({
                 faturamento: faturamentoRes.data,
-                pagamento: pagamentoRes.data,
+                pagamento_total: { labels: pagamentoRes.data.labels, data: pagamentoRes.data.data.total }, 
+                pagamento_pessoal: { labels: pagamentoRes.data.labels, data: pagamentoRes.data.data.pessoal },
+                pagamento_encargos: { labels: pagamentoRes.data.labels, data: pagamentoRes.data.data.encargos },
+                pagamento_administracao: { labels: pagamentoRes.data.labels, data: pagamentoRes.data.data.administracao },
                 saldo: saldoRes.data
             });
         } catch (err) {
             alert('Erro ao carregar os dados: ' + err);
         }
+    };
+
+    // Função para lidar com a mudança da classe de despesa
+    const handleClassChange = (event) => {
+        setSelectedClass(event.target.value);
     };
 
     const lineChartOptions = {
@@ -70,7 +79,7 @@ const FinancialDashboard = () => {
     });
 
     return (
-        <>
+        <div>
             <Grid container spacing={3} justifyContent="center">
                 <Grid item xs={12} sm={4} md={4} lg={4}>
                     <Card>
@@ -131,8 +140,23 @@ const FinancialDashboard = () => {
                 <Grid item xs={4}>
                     <Card>
                         <CardContent>
-                            <Typography variant="subtitle2">Despesas - Últimos 12 Meses</Typography>
-                            <Line data={createLineChartData("Despesas", chartData.pagamento, "rgba(255, 0, 0, 1)")} options={lineChartOptions} />
+                            <Box display="flex" alignItems="center" justifyContent="space-between">
+                                <Typography variant="subtitle2">Despesas - Últimos 12 Meses</Typography>
+                                <FormControl variant="outlined" size="small" sx={{ minWidth: 115 }}>
+                                    <InputLabel>Classe despesa</InputLabel>
+                                    <Select
+                                        value={selectedClass}
+                                        onChange={handleClassChange}
+                                        label="Classe despesa"
+                                    >
+                                        <MenuItem value="total">Total</MenuItem>
+                                        <MenuItem value="pessoal">Pessoal</MenuItem>
+                                        <MenuItem value="encargos">Encargos</MenuItem>
+                                        <MenuItem value="administracao">Administração</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Box>
+                            <Line data={createLineChartData("Despesas", chartData[`pagamento_${selectedClass}`], "rgba(255, 0, 0, 1)")} options={lineChartOptions} />
                         </CardContent>
                     </Card>
                 </Grid>
@@ -215,7 +239,7 @@ const FinancialDashboard = () => {
                     </Card>
                 </Grid>
             </Grid>
-        </>
+        </div>
     );
 };
 

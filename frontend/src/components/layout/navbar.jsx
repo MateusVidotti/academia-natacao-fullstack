@@ -16,7 +16,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import logo from '../../assets/img/logo_natacao.jpg';
 
-const pages = ['Home', 'Alunos', 'Fornecedores', 'Pagamentos', 'Recebimentos'];
+const pages = ['Painel', 'Alunos', 'Fornecedores', 'Pagamentos', 'Recebimentos'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function Navbar() {

@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 
 class RecebimentoView(viewsets.ModelViewSet):
     """View Fornecedor"""
-    queryset = Recebimento.objects.all()
+    queryset = Recebimento.objects.all().order_by('-data_vencimento')
     serializer_class = RecebimentoSerializer
     permission_classes = [IsAuthenticated]
 
